@@ -3,9 +3,9 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resource :token, only: [:create]
+      resource :token, only: %i[create]
 
-      resources :users, only: [:create, :show]
+      resources :users, only: %i[create show]
     end
   end
 end

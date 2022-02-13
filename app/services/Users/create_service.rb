@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Users
   class CreateService < BaseService
     def initialize(params)
@@ -11,15 +13,12 @@ module Users
       user = User.find_by(email: @email)
       raise(Exceptions::NotUniqueRecord.message('Email already taken')) if user.present?
 
-
-      user = User.create(fields)
+      user = User.create!(fields)
       {
-        user: User.create(user_fields),
+        user: User.create!(user_fields),
         token: Jwt::Wrapper.encode({ user_id: user.id })
       }
     end
-
-
 
     private
 
@@ -34,6 +33,5 @@ module Users
 
       user_fields
     end
-
   end
 end
